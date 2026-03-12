@@ -22,8 +22,14 @@ export default function OrderButton({ siteName, productId, productName, price, s
 
   // Convert price to number safely
   const numericPrice = typeof price === 'string' ? parseFloat(price) : price;
-  const formattedPrice = numericPrice.toFixed(2);
-  const totalAmount = (numericPrice * quantity).toFixed(2);
+  
+  // Format price in DT (Tunisian Dinar) with 3 decimal places
+  const formatCurrency = (amount: number) => {
+    return amount.toFixed(3) + ' DT';
+  };
+
+  const formattedPrice = formatCurrency(numericPrice);
+  const totalAmount = numericPrice * quantity;
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -145,6 +151,12 @@ export default function OrderButton({ siteName, productId, productName, price, s
             <span className="text-sm text-gray-500">Max: {stock}</span>
           </div>
 
+          {/* Price Display */}
+          <div className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+            <span className="text-gray-600">Unit Price:</span>
+            <span className="text-xl font-bold text-gray-900">{formatCurrency(numericPrice)}</span>
+          </div>
+
           {/* Order Button */}
           <button
             onClick={handleOrder}
@@ -195,7 +207,7 @@ export default function OrderButton({ siteName, productId, productName, price, s
               <input
                 type="tel"
                 name="phoneNumber"
-                placeholder="+1 234 567 8900"
+                placeholder="+216 99 999 999"
                 value={formData.phoneNumber}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
@@ -229,16 +241,16 @@ export default function OrderButton({ siteName, productId, productName, price, s
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Price:</span>
-                <span className="text-gray-900">${formattedPrice} × {quantity}</span>
+                <span className="text-gray-900">{formatCurrency(numericPrice)} × {quantity}</span>
               </div>
               <div className="border-t border-gray-200 my-2 pt-2">
                 <div className="flex justify-between font-medium">
                   <span>Total Amount:</span>
-                  <span className="text-indigo-600 text-lg">${totalAmount}</span>
+                  <span className="text-indigo-600 text-lg">{formatCurrency(totalAmount)}</span>
                 </div>
               </div>
               <div className="bg-green-50 p-2 rounded-lg text-center">
-                <span className="text-sm text-green-700">💵 Pay {totalAmount} upon delivery</span>
+                <span className="text-sm text-green-700">💵 Pay {formatCurrency(totalAmount)} upon delivery</span>
               </div>
             </div>
           </div>

@@ -150,30 +150,30 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-3 sm:p-4 z-50">
       <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold text-gray-900">Edit Store Settings</h3>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <X className="w-5 h-5" />
+        <div className="p-4 sm:p-5 lg:p-6">
+          <div className="flex justify-between items-center mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900">Edit Store Settings</h3>
+            <button onClick={onClose} className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+            <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-xs sm:text-sm">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {/* Logo Upload */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                 Store Logo
               </label>
-              <div className="flex items-start gap-4">
-                <div className="relative w-24 h-24 bg-gray-100 rounded-xl overflow-hidden border-2 border-dashed border-gray-300">
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-xl overflow-hidden border-2 border-dashed border-gray-300 flex-shrink-0">
                   {logoPreview ? (
                     <>
                       <Image src={logoPreview} alt="Logo" fill className="object-cover" />
@@ -183,15 +183,15 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                           setLogoFile(null);
                           setLogoPreview('');
                         }}
-                        className="absolute top-1 right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600"
+                        className="absolute top-1 right-1 w-5 h-5 sm:w-6 sm:h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600"
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-3 h-3 sm:w-4 sm:h-4" />
                       </button>
                     </>
                   ) : (
                     <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer">
-                      <Upload className="w-6 h-6 text-gray-400" />
-                      <span className="text-xs text-gray-400 mt-1">Upload</span>
+                      <Upload className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
+                      <span className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1">Upload</span>
                       <input
                         type="file"
                         accept="image/*"
@@ -201,7 +201,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                     </label>
                   )}
                 </div>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
                   Upload new logo to replace existing one
                 </p>
               </div>
@@ -209,7 +209,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
 
             {/* Store Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Store Name *
               </label>
               <input
@@ -217,7 +217,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                 id="name"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                 required
                 disabled={loading}
               />
@@ -225,7 +225,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="description" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Store Description
               </label>
               <textarea
@@ -233,15 +233,15 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                 value={formData.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                 disabled={loading}
               />
             </div>
 
             {/* Contact Info Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Phone
                 </label>
                 <input
@@ -249,13 +249,13 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                   id="phone"
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   disabled={loading}
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Contact Email
                 </label>
                 <input
@@ -263,31 +263,32 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                   id="email"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   disabled={loading}
                 />
               </div>
 
               <div>
-                <label htmlFor="currency" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="currency" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Currency
                 </label>
                 <select
                   id="currency"
                   value={formData.currency}
                   onChange={(e) => setFormData({...formData, currency: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   disabled={loading}
                 >
                   <option value="USD">USD ($)</option>
                   <option value="EUR">EUR (€)</option>
                   <option value="GBP">GBP (£)</option>
                   <option value="JPY">JPY (¥)</option>
+                  <option value="TND">TND (DT)</option>
                 </select>
               </div>
 
               <div>
-                <label htmlFor="founded_at" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="founded_at" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Founded Date
                 </label>
                 <input
@@ -295,7 +296,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                   id="founded_at"
                   value={formData.founded_at}
                   onChange={(e) => setFormData({...formData, founded_at: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   disabled={loading}
                 />
               </div>
@@ -303,7 +304,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
 
             {/* Address */}
             <div>
-              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="address" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Address
               </label>
               <input
@@ -311,15 +312,15 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                 id="address"
                 value={formData.address}
                 onChange={(e) => setFormData({...formData, address: e.target.value})}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                 disabled={loading}
               />
             </div>
 
             {/* Social Media */}
-            <div className="border-t border-gray-200 pt-4">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">Social Media</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="border-t border-gray-200 pt-3 sm:pt-4">
+              <h3 className="text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">Social Media</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label htmlFor="instagram" className="block text-xs text-gray-500 mb-1">
                     Instagram
@@ -330,7 +331,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                     value={formData.instagram}
                     onChange={(e) => setFormData({...formData, instagram: e.target.value})}
                     placeholder="username"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                     disabled={loading}
                   />
                 </div>
@@ -345,7 +346,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                     value={formData.facebook}
                     onChange={(e) => setFormData({...formData, facebook: e.target.value})}
                     placeholder="username"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                     disabled={loading}
                   />
                 </div>
@@ -360,7 +361,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                     value={formData.twitter}
                     onChange={(e) => setFormData({...formData, twitter: e.target.value})}
                     placeholder="username"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                     disabled={loading}
                   />
                 </div>
@@ -375,7 +376,7 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
                     value={formData.website}
                     onChange={(e) => setFormData({...formData, website: e.target.value})}
                     placeholder="https://..."
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                     disabled={loading}
                   />
                 </div>
@@ -383,11 +384,11 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3 pt-4">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4">
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 py-3 border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                className="w-full sm:flex-1 order-2 sm:order-1 py-2.5 sm:py-3 border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
                 disabled={loading || uploadingLogo}
               >
                 Cancel
@@ -395,12 +396,14 @@ export default function EditSiteModal({ site, onClose, onSuccess }: EditSiteModa
               <button
                 type="submit"
                 disabled={loading || uploadingLogo}
-                className="flex-1 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-300 flex items-center justify-center gap-2"
+                className="w-full sm:flex-1 order-1 sm:order-2 py-2.5 sm:py-3 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-300 flex items-center justify-center gap-2"
               >
                 {loading || uploadingLogo ? (
                   <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    {uploadingLogo ? 'Uploading...' : 'Saving...'}
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span className="truncate">
+                      {uploadingLogo ? 'Uploading...' : 'Saving...'}
+                    </span>
                   </>
                 ) : (
                   'Save Changes'

@@ -6,7 +6,7 @@ import { Loader2, X, Upload } from 'lucide-react';
 import Image from 'next/image';
 
 interface CreateSiteFormProps {
-  onSubmit: (data: any) => Promise<void>;  // This should match what you're passing
+  onSubmit: (data: any) => Promise<void>;
   onCancel: () => void;
   isLoading: boolean;
 }
@@ -116,7 +116,6 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
         logoUrl = await uploadToImgBB(logoFile);
       }
 
-      // Call the onSubmit prop with the form data
       await onSubmit({
         ...formData,
         logo_url: logoUrl
@@ -130,20 +129,20 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
   const isSubmitting = isLoading || uploadingLogo;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 text-left">
+    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 lg:space-y-6 text-left">
       {error && (
-        <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+        <div className="p-2 sm:p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-xs sm:text-sm">
           {error}
         </div>
       )}
 
       {/* Logo Upload */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
           Store Logo
         </label>
-        <div className="flex items-start gap-4">
-          <div className="relative w-24 h-24 bg-gray-100 rounded-xl overflow-hidden border-2 border-dashed border-gray-300">
+        <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-xl overflow-hidden border-2 border-dashed border-gray-300 flex-shrink-0">
             {logoPreview ? (
               <>
                 <Image src={logoPreview} alt="Logo preview" fill className="object-cover" />
@@ -153,15 +152,15 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
                     setLogoFile(null);
                     setLogoPreview('');
                   }}
-                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600"
+                  className="absolute top-1 right-1 w-5 h-5 sm:w-6 sm:h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3 h-3 sm:w-4 sm:h-4" />
                 </button>
               </>
             ) : (
               <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer">
-                <Upload className="w-6 h-6 text-gray-400" />
-                <span className="text-xs text-gray-400 mt-1">Upload</span>
+                <Upload className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
+                <span className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1">Upload</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -172,9 +171,10 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
             )}
           </div>
           <div className="flex-1">
-            <p className="text-sm text-gray-500">
+            <p className="text-xs sm:text-sm text-gray-500">
               Upload your store logo. Recommended size: 200x200px.
-              <br />Max file size: 32MB 
+              <br className="hidden sm:block" />
+              <span className="text-xs">Max file size: 32MB</span>
             </p>
           </div>
         </div>
@@ -182,7 +182,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
 
       {/* Store Name */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
           Store Name *
         </label>
         <input
@@ -190,7 +190,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
           id="name"
           value={formData.name}
           onChange={(e) => handleNameChange(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+          className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
           required
           disabled={isSubmitting}
         />
@@ -198,17 +198,17 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
 
       {/* Store Slug */}
       <div>
-        <label htmlFor="slug" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="slug" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
           Store URL
         </label>
-        <div className="flex items-center">
-          <span className="text-gray-500 mr-2 text-sm">yoursite.com/</span>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2">
+          <span className="text-xs sm:text-sm text-gray-500">yoursite.com/</span>
           <input
             type="text"
             id="slug"
             value={formData.slug}
             readOnly
-            className="flex-1 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-600"
+            className="w-full sm:flex-1 px-3 sm:px-4 py-2 sm:py-2.5 text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-600"
           />
         </div>
         <p className="text-xs text-gray-500 mt-1">Auto-generated from store name</p>
@@ -216,7 +216,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
 
       {/* Description */}
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="description" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
           Store Description
         </label>
         <textarea
@@ -224,15 +224,15 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
           value={formData.description}
           onChange={(e) => setFormData({...formData, description: e.target.value})}
           rows={3}
-          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+          className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
           disabled={isSubmitting}
         />
       </div>
 
       {/* Contact Info Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="phone" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
             Phone
           </label>
           <input
@@ -240,13 +240,13 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({...formData, phone: e.target.value})}
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
             disabled={isSubmitting}
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
             Contact Email
           </label>
           <input
@@ -254,31 +254,32 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
             id="email"
             value={formData.email}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
             disabled={isSubmitting}
           />
         </div>
 
         <div>
-          <label htmlFor="currency" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="currency" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
             Currency
           </label>
           <select
             id="currency"
             value={formData.currency}
             onChange={(e) => setFormData({...formData, currency: e.target.value})}
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
             disabled={isSubmitting}
           >
             <option value="USD">USD ($)</option>
             <option value="EUR">EUR (€)</option>
             <option value="GBP">GBP (£)</option>
             <option value="JPY">JPY (¥)</option>
+            <option value="TND">TND (DT)</option>
           </select>
         </div>
 
         <div>
-          <label htmlFor="founded_at" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="founded_at" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
             Founded Date
           </label>
           <input
@@ -286,7 +287,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
             id="founded_at"
             value={formData.founded_at}
             onChange={(e) => setFormData({...formData, founded_at: e.target.value})}
-            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+            className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
             disabled={isSubmitting}
           />
         </div>
@@ -294,7 +295,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
 
       {/* Address */}
       <div>
-        <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="address" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
           Address
         </label>
         <input
@@ -302,15 +303,15 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
           id="address"
           value={formData.address}
           onChange={(e) => setFormData({...formData, address: e.target.value})}
-          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+          className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
           disabled={isSubmitting}
         />
       </div>
 
       {/* Social Media */}
-      <div className="border-t border-gray-200 pt-4">
-        <h3 className="text-sm font-medium text-gray-700 mb-3">Social Media (Optional)</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="border-t border-gray-200 pt-3 sm:pt-4">
+        <h3 className="text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-3">Social Media (Optional)</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label htmlFor="instagram" className="block text-xs text-gray-500 mb-1">
               Instagram
@@ -321,7 +322,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
               value={formData.instagram}
               onChange={(e) => setFormData({...formData, instagram: e.target.value})}
               placeholder="username"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               disabled={isSubmitting}
             />
           </div>
@@ -336,7 +337,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
               value={formData.facebook}
               onChange={(e) => setFormData({...formData, facebook: e.target.value})}
               placeholder="username"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               disabled={isSubmitting}
             />
           </div>
@@ -351,7 +352,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
               value={formData.twitter}
               onChange={(e) => setFormData({...formData, twitter: e.target.value})}
               placeholder="username"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               disabled={isSubmitting}
             />
           </div>
@@ -366,7 +367,7 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
               value={formData.website}
               onChange={(e) => setFormData({...formData, website: e.target.value})}
               placeholder="https://..."
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+              className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
               disabled={isSubmitting}
             />
           </div>
@@ -374,11 +375,11 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
       </div>
 
       {/* Actions */}
-      <div className="flex gap-3 pt-4">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4">
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 py-3 border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+          className="w-full sm:flex-1 order-2 sm:order-1 py-2.5 sm:py-3 border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
           disabled={isSubmitting}
         >
           Cancel
@@ -386,12 +387,14 @@ export default function CreateSiteForm({ onSubmit, onCancel, isLoading }: Create
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-300 flex items-center justify-center gap-2"
+          className="w-full sm:flex-1 order-1 sm:order-2 py-2.5 sm:py-3 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-300 flex items-center justify-center gap-2"
         >
           {isSubmitting ? (
             <>
-              <Loader2 className="w-5 h-5 animate-spin" />
-              {uploadingLogo ? 'Uploading logo...' : 'Creating store...'}
+              <Loader2 className="w-4 h-4 animate-spin" />
+              <span className="truncate">
+                {uploadingLogo ? 'Uploading logo...' : 'Creating store...'}
+              </span>
             </>
           ) : (
             'Create Store'

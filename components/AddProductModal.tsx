@@ -132,30 +132,30 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-3 sm:p-4 z-50">
       <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold text-gray-900">Add New Product</h3>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <X className="w-5 h-5" />
+        <div className="p-4 sm:p-5 lg:p-6">
+          <div className="flex justify-between items-center mb-3 sm:mb-4">
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900">Add New Product</h3>
+            <button onClick={onClose} className="p-1.5 sm:p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <X className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+            <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-xs sm:text-sm">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {/* Image Upload */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                 Product Image
               </label>
-              <div className="flex items-start gap-4">
-                <div className="relative w-24 h-24 bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300">
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-lg overflow-hidden border-2 border-dashed border-gray-300 flex-shrink-0">
                   {imagePreview ? (
                     <>
                       <Image src={imagePreview} alt="Preview" fill className="object-cover" />
@@ -165,15 +165,15 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
                           setImageFile(null);
                           setImagePreview('');
                         }}
-                        className="absolute top-1 right-1 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600"
+                        className="absolute top-1 right-1 w-5 h-5 sm:w-6 sm:h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600"
                       >
-                        <X className="w-4 h-4" />
+                        <X className="w-3 h-3 sm:w-4 sm:h-4" />
                       </button>
                     </>
                   ) : (
                     <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer">
-                      <Upload className="w-6 h-6 text-gray-400" />
-                      <span className="text-xs text-gray-400 mt-1">Upload</span>
+                      <Upload className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
+                      <span className="text-[10px] sm:text-xs text-gray-400 mt-0.5 sm:mt-1">Upload</span>
                       <input
                         type="file"
                         accept="image/*"
@@ -183,7 +183,7 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
                     </label>
                   )}
                 </div>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs sm:text-sm text-gray-500">
                   Upload product image. Max size: 32MB
                 </p>
               </div>
@@ -191,7 +191,7 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
 
             {/* Product Name */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Product Name *
               </label>
               <input
@@ -199,7 +199,7 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
                 id="name"
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                 required
                 disabled={loading}
               />
@@ -207,7 +207,7 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="description" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Description
               </label>
               <textarea
@@ -215,32 +215,32 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
                 value={formData.description}
                 onChange={(e) => setFormData({...formData, description: e.target.value})}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                 disabled={loading}
               />
             </div>
 
             {/* Price and Category Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
-                <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
-                  Price * ($)
+                <label htmlFor="price" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
+                  Price * (DT)
                 </label>
                 <input
                   type="number"
                   id="price"
                   value={formData.price}
                   onChange={(e) => setFormData({...formData, price: e.target.value})}
-                  step="0.01"
+                  step="0.001"
                   min="0"
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   required
                   disabled={loading}
                 />
               </div>
 
               <div>
-                <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="category" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                   Category
                 </label>
                 <input
@@ -248,7 +248,7 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
                   id="category"
                   value={formData.category}
                   onChange={(e) => setFormData({...formData, category: e.target.value})}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   disabled={loading}
                 />
               </div>
@@ -256,7 +256,7 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
 
             {/* Stock */}
             <div>
-              <label htmlFor="stock" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="stock" className="block text-xs sm:text-sm font-medium text-gray-700 mb-1">
                 Stock Quantity
               </label>
               <input
@@ -265,17 +265,17 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
                 value={formData.stock}
                 onChange={(e) => setFormData({...formData, stock: e.target.value})}
                 min="0"
-                className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                className="w-full px-3 sm:px-4 py-2 sm:py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                 disabled={loading}
               />
             </div>
 
             {/* Actions */}
-            <div className="flex gap-3 pt-4">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4">
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 py-3 border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                className="w-full sm:flex-1 order-2 sm:order-1 py-2.5 sm:py-3 border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
                 disabled={loading || uploadingImage}
               >
                 Cancel
@@ -283,12 +283,14 @@ export default function AddProductModal({ siteId, onClose, onSuccess }: AddProdu
               <button
                 type="submit"
                 disabled={loading || uploadingImage}
-                className="flex-1 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-300 flex items-center justify-center gap-2"
+                className="w-full sm:flex-1 order-1 sm:order-2 py-2.5 sm:py-3 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-300 flex items-center justify-center gap-2"
               >
                 {loading || uploadingImage ? (
                   <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    {uploadingImage ? 'Uploading...' : 'Saving...'}
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span className="truncate">
+                      {uploadingImage ? 'Uploading...' : 'Saving...'}
+                    </span>
                   </>
                 ) : (
                   'Add Product'
